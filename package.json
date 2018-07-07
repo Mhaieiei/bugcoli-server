@@ -1,0 +1,29 @@
+{
+  "name": "bugcoli-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "nodemon src/server.js "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Mhaieiei/bugcoli-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.2",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "fs": "0.0.1-security",
+    "helmet": "^3.12.1",
+    "mongoose": "^5.2.1",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.17.5",
+    "path": "^0.12.7",
+    "winston": "^3.0.0"
+  }
+}

@@ -1,0 +1,43 @@
+version: '2'
+
+services:
+
+## MONGO Container ############################
+  mongo:
+   image: mongo:3.6
+   container_name: mongo
+   ports:
+    - "27017:27017"
+   volumes:
+    - ./data/mongo:/data/db
+
+  mongoClientTemp:
+   image: mongo:3.6
+   container_name: mongoClientTemp
+   links:
+    - mongo:mongo
+   command: mongo --host mongo --eval  "db.getSiblingDB('bills').createUser({user:'test', pwd:'1234', roles:[{role:'readWrite',db:'bills'}]});"
+   depends_on:
+    - mongo
+
+## LOG Sevice Container ########################
+
+  bill-service:
+    image: node:8.9
+    command: ["/bin/sh","-c","npm run dev"]
+    ports: 
+      - "8080:8080"
+    volumes:
+      - .:/usr/src/app
+    links:
+      - mongo:mongo
+    depends_on:
+      - mongoClientTemp
+
+### Add more Containers below ###############################
+networks:
+    default:
+        external:
+            name: microservicenetwork
+
+
